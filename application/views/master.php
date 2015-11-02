@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
-    <title>Serbaguna</title>
+    <title>Multi Purpose Tool</title>
 
     <!-- Bootstrap -->
     <link href="<?= URL::base() ?>bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -13,7 +13,7 @@
     <link href="<?= URL::base() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.min.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.theme.min.css" rel="stylesheet">
-    <base href="<?= URL::base() ?>" target="_blank">
+    <base href="<?= URL::base() ?>">
 
 
 
@@ -28,9 +28,10 @@
   <div class="blog-masthead">
   <div class="container">
     <nav class="blog-nav">
-      <a class="blog-nav-item active" href="/" data-menu="ongkir">Ongkir</a>
-      <a class="blog-nav-item" href="#">New features</a>
-      <a class="blog-nav-item" href="#">Press</a>
+      <a class="blog-nav-item brand" href="/">Multi Purpose Tool</a>
+      <a class="blog-nav-item" href="/" data-menu="ongkir">Ongkir</a>
+      <a class="blog-nav-item" href="/twitter" data-menu="twitter">Twitter</a>
+      <a class="blog-nav-item" href="/flight" data-menu="flight">Penerbangan</a>
       <a class="blog-nav-item" href="#">New hires</a>
       <a class="blog-nav-item" href="#">About</a>
     </nav>

@@ -129,12 +129,14 @@ Kohana::modules(array(
 	// 'auth'       => MODPATH.'auth',       // Basic authentication
 	// 'cache'      => MODPATH.'cache',      // Caching with multiple backends
 	// 'codebench'  => MODPATH.'codebench',  // Benchmarking tool
-	// 'database'   => MODPATH.'database',   // Database access
+	'database'   => MODPATH.'database',   // Database access
 	// 'image'      => MODPATH.'image',      // Image manipulation
 	// 'minion'     => MODPATH.'minion',     // CLI Tasks
-	// 'orm'        => MODPATH.'orm',        // Object Relationship Mapping
+	'orm'        => MODPATH.'orm',        // Object Relationship Mapping
 	// 'unittest'   => MODPATH.'unittest',   // Unit testing
 	// 'userguide'  => MODPATH.'userguide',  // User guide and API documentation
+	// 'devtools'  => MODPATH.'devtools',  // DEVELOPMENT TOOL
+	// 'sqlite'  => MODPATH.'sqlite',  // DEVELOPMENT TOOL
 	));
 
 /**
@@ -156,11 +158,11 @@ Route::set('default', '(<controller>(/<action>(/<id>)))')
 		'action'     => 'index',
 	));
 
-Route::set('rest-api', 'api/(<action>)')
-    ->defaults(array(
-        'controller' => 'api',
-		'action'     => 'index',
-    ));
+// Route::set('rest-api', 'api/(<action>)')
+//     ->defaults(array(
+//         'controller' => 'api',
+// 		'action'     => 'index',
+//     ));
  // Route::set('settings', 'admin/settings(/<action>)')
 	// ->defaults(array(
 	// 	'directory' => 'admin',

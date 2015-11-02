@@ -1,3 +1,4 @@
+<input type="hidden" id="page" value="ongkir">
 <div ng-controller="ongkirCtrl">
 	<div class="col-md-3 col-sm-6">
 		<div class="panel panel-default">

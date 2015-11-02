@@ -30,12 +30,15 @@ class Controller_Api extends Controller_Master {
 		        'format' => 'json'
 		    ));
 		}
-		if ($get_data->status->code == 0)
+		if ($get_data)
 		{
-			foreach ($get_data->cities as $key => $value) 
+			if ($get_data->status->code == 0)
 			{
-				# code...
-				$result[] = ['id'=>$value,'label'=>$value,'value'=>$value];
+				foreach ($get_data->cities as $key => $value) 
+				{
+					# code...
+					$result[] = ['id'=>$value,'label'=>$value,'value'=>$value];
+				}
 			}
 		}
 	    echo json_encode($result);
@@ -67,20 +70,22 @@ class Controller_Api extends Controller_Master {
 		        'format' => 'json'
 		    ));
 		}
-		if(!json_decode($get_data)){
+		// print_r($get_data);die();
+		if(($get_data) and is_object($get_data)){
 
-			$result["status"] = "Data error ......";
+			$result['output'] = $get_data;
+			$result['output']->city = ["origin" => $asal, "destination" => $tujuan];
+			$result['output']->weight = $berat;
 			
 		}
-		elseif ($get_data->status->code == 0)
+		elseif (!is_object($get_data)) 
 		{
-			$result['output'] = $get_data;
-			$result['output']->weight = $berat;
+			$result["status"] = "Data error ......";
+			
 		}
 		else
 		{
 			$result['output'] = $get_data;
-			$result['output']->city = ["origin" => $asal, "destination" => $tujuan];
 			$result['output']->weight = $berat;
 			// $result['output']->city = []
 			// $result['output']->city['origin'] = $asal ;
@@ -88,6 +93,17 @@ class Controller_Api extends Controller_Master {
 		}
 		echo json_encode($result);
 
+	}
+
+	public function action_bandara()
+	{
+		$result = [];
+		$ap = new Model_Airports();
+		$airports = $ap->where('country', '=', 'Indonesia')->find_all();
+		// print_r($airports); die();
+		# code...
+		$result = ["airports"=>$airports];
+		echo json_encode($result);
 	}
 
 } // End Welcome
