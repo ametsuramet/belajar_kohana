@@ -15,4 +15,13 @@ class Controller_Flight extends Controller_Master {
 
 	}
 
+	public function action_add(){
+		$master = View::factory('master');
+		$content = View::factory('flight/add');
+		$master->content = $content;
+
+		$this->response->body($master);
+
+	}
+
 } // End Welcome

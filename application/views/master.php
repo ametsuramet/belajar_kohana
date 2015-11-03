@@ -13,6 +13,7 @@
     <link href="<?= URL::base() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.min.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.theme.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="<?= URL::base() ?>bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <base href="<?= URL::base() ?>">
 
 
@@ -32,7 +33,7 @@
       <a class="blog-nav-item" href="/" data-menu="ongkir">Ongkir</a>
       <a class="blog-nav-item" href="/twitter" data-menu="twitter">Twitter</a>
       <a class="blog-nav-item" href="/flight" data-menu="flight">Penerbangan</a>
-      <a class="blog-nav-item" href="#">New hires</a>
+      <a class="blog-nav-item" href="/flight/add" data-menu="add_flight">++Penerbangan</a>
       <a class="blog-nav-item" href="#">About</a>
     </nav>
   </div>
@@ -42,8 +43,10 @@
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
     <script src="<?= URL::base() ?>bower_components/jquery/dist/jquery.min.js"></script>
+    <script type="text/javascript" src="<?= URL::base() ?>bower_components/moment/min/moment.min.js"></script>
     <script src="<?= URL::base() ?>bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="<?= URL::base() ?>bower_components/angular/angular.min.js"></script>
+    <script type="text/javascript" src="<?= URL::base() ?>bower_components/eonasdan-bootstrap-datetimepicker/build/js/bootstrap-datetimepicker.min.js"></script>
     <script src="<?= URL::base() ?>assets/js/jquery-ui.min.js"></script>
     <script src="<?= URL::base() ?>assets/js/app.js"></script>
     <script src="<?= URL::base() ?>assets/js/script.js"></script>

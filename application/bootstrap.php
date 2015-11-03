@@ -20,6 +20,10 @@ if (is_file(APPPATH.'includes/REST_Ongkir.php'))
 {
 	require APPPATH.'includes/REST_Ongkir.php';
 }
+if (is_file(APPPATH.'includes/simple_html_dom.php'))
+{
+	require APPPATH.'includes/simple_html_dom.php';
+}
 
 /**
  * Set the default time zone.
