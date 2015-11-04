@@ -13,6 +13,7 @@
     <link href="<?= URL::base() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.min.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.theme.min.css" rel="stylesheet">
+    <link href="<?= URL::base() ?>assets/css/font-awesome.min.css" rel="stylesheet">
     <link rel="stylesheet" href="<?= URL::base() ?>bower_components/eonasdan-bootstrap-datetimepicker/build/css/bootstrap-datetimepicker.min.css" />
     <base href="<?= URL::base() ?>">
 

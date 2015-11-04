@@ -174,41 +174,150 @@ class Controller_Api extends Controller_Master {
 		$loc = explode('.',$this->params->ap);
 		$date = explode('.',$this->params->dt);
 		$passenger = explode('.',$this->params->ps);
+		$passenger_origin = $loc[0];
+		$passenger_destination = $loc[1];
+		$date_trip = $date[0];
+		$date_return = $date[1];
+		$from = ORM::factory('Airports',$passenger_origin)->as_array();
+		$to = ORM::factory('Airports',$passenger_destination)->as_array();
+		// PLANNING TRIP
+		$schedule_trip = ORM::factory('Schedules')->where('origin_id','=',$passenger_origin)
+							->where('destination_id','=',$passenger_destination)
+	    					->where('date', '=', date('Y-m-d', strtotime($date_trip)))
+							->find_all();
+		// PLANNING RETURN
+		$schedule_return = ORM::factory('Schedules')->where('origin_id','=',$passenger_destination)
+							->where('destination_id','=',$passenger_origin)
+	    					->where('date', '=', date('Y-m-d', strtotime($date_return)))
+							->find_all();
+		//MAKE LIST AIRLINES FOR PLANNING TRIP
+		$list_airlines_trip = [];
+		foreach ($schedule_trip->as_array() as $key => $value) {
+			$list_airlines_trip[] =['id'=>$value->airlines_id,'name'=>$value->airlines->name];
+		}
+		//MAKE LIST AIRLINES FOR PLANNING RETURN
+		$list_airlines_return = [];
+		foreach ($schedule_return->as_array() as $key => $value) {
+			$list_airlines_return[] =['id'=>$value->airlines_id,'name'=>$value->airlines->name];
+		}
+		//MERGE ALL AIR LINES
+		$list_airlines = $this->arrayUnique(array_merge($list_airlines_trip,$list_airlines_return));
+		//PUSH SCHEDULE TO AIRLINES && CREATE PACKAGE
+		$airlines = [];
+		$trip_type = "single-trip";
+		if ($date_return !="NA")
+			$trip_type = 'round-trip';
+		foreach ($list_airlines as $key => $airline) {
 
-		$from = ORM::factory('Airports',$loc[0])->as_array();
-		$to = ORM::factory('Airports',$loc[1])->as_array();
-
-
-	    $schedules = new Model_Schedules;
-    	$schedules = $schedules->where('origin_id', '=', $loc[0]);
-    	$schedules = $schedules->where('destination_id', '=', $loc[1]);
-    	$schedules = $schedules->where('date', '=', date('Y-m-d', strtotime($date[0])));
-	    $schedules->reset(FALSE); 
-	    $total_schedules = $schedules->count_all();
-	    $schedules = $schedules->find_all();
-
-	    // print_r($schedules);die();
-
-	    $list_schedule = [];
-
-	    foreach ($schedules as $i=>$schedule) {
-	    	foreach ($schedule->as_array() as $key => $value) {
-	    		$list_schedule[$i][$key] = $value;
-	    	}
-	    		$list_schedule[$i]['airlines'] = $schedule->airlines->as_array();
-	    		$list_schedule[$i]['origin'] = $schedule->origin->as_array();
-	    		$list_schedule[$i]['destination'] = $schedule->origin->as_array();
-	    }
-	
+			$airlines[$key] = ['id'=>$airline['id'],'name'=>$airline['name'],'trip_type'=>$trip_type];
+			$airlines[$key]['schedules'] = [];
+			//PUSH SCHEDULE TRIP
+			foreach ($schedule_trip->as_array() as $i => $trip) {
+				if ( $airline['id'] == $trip->airlines_id)
+					$airlines[$key]['schedules']['trip'][] = $trip->as_array();
+			}
+			//RETURN FALSE IF TRIP IS NULL
+			if (isset($airlines[$key]['schedules']['trip']))
+			{
+				foreach ($schedule_return->as_array() as $j => $return) {
+					if ( $airline['id'] == $return->airlines_id)
+						$airlines[$key]['schedules']['return'][] = $return->as_array();
+				}
+			}
+			// echo $airline['id'] . "--";
+		}
+			// print_r($airlines);
+		//CLEAR AIRPLANES THAT HAVE NO SCHEDULES
+		$clear_airlines = [];
+		foreach ($airlines as $airline) {
+			if(count($airline['schedules'])>0)
+			{
+			// echo $airline['name']  .":". count($airline['schedules']);
+			$clear_airlines[] = $airline;
+			}
+		}
 
 		$result = [
 			'origin' => ['name'=>$from['name'] ,'city'=>$from['city'] ,'IATA'=>$from['IATA']],
 			'destination' => ['name'=>$to['name'] ,'city'=>$to['city'] ,'IATA'=>$to['IATA']],
 			'passenger' => ['dewasa'=>$passenger[0],'anak'=>$passenger[1],'balita'=>$passenger[2]],
-			'schedule' => $list_schedule,
+			'date' => ['departure'=>$date[0],'arrival'=>$date[1]],
+			'airlines' => $clear_airlines,
 			];
 		echo json_encode($result);
 
+	}
+
+	public function action_test_flight(){
+		$result = [];
+		$loc = explode('.',$this->params->ap);
+		$date = explode('.',$this->params->dt);
+		$passenger = explode('.',$this->params->ps);
+		$passenger_origin = $loc[0];
+		$passenger_destination = $loc[1];
+		$date_trip = $date[0];
+		$date_return = $date[1];
+		$from = ORM::factory('Airports',$passenger_origin)->as_array();
+		$to = ORM::factory('Airports',$passenger_destination)->as_array();
+		// PLANNING TRIP
+		$schedule_trip = ORM::factory('Schedules')->where('origin_id','=',$passenger_origin)
+							->where('destination_id','=',$passenger_destination)
+	    					->where('date', '=', date('Y-m-d', strtotime($date_trip)))
+							->find_all();
+		// PLANNING RETURN
+		$schedule_return = ORM::factory('Schedules')->where('origin_id','=',$passenger_destination)
+							->where('destination_id','=',$passenger_origin)
+	    					->where('date', '=', date('Y-m-d', strtotime($date_return)))
+							->find_all();
+		//MAKE LIST AIRLINES FOR PLANNING TRIP
+		$list_airlines_trip = [];
+		foreach ($schedule_trip->as_array() as $key => $value) {
+			$list_airlines_trip[] =['id'=>$value->airlines_id,'name'=>$value->airlines->name];
+		}
+		//MAKE LIST AIRLINES FOR PLANNING RETURN
+		$list_airlines_return = [];
+		foreach ($schedule_return->as_array() as $key => $value) {
+			$list_airlines_return[] =['id'=>$value->airlines_id,'name'=>$value->airlines->name];
+		}
+		//MERGE ALL AIR LINES
+		$list_airlines = $this->arrayUnique(array_merge($list_airlines_trip,$list_airlines_return));
+		//PUSH SCHEDULE TO AIRLINES && CREATE PACKAGE
+		$airlines = [];
+		$trip_type = "single-trip";
+		if ($date_return !="NA")
+			$trip_type = 'round-trip';
+		foreach ($list_airlines as $key => $airline) {
+
+			$airlines[$key] = ['id'=>$airline['id'],'name'=>$airline['name'],'trip_type'=>$trip_type];
+			$airlines[$key]['schedules'] = [];
+			//PUSH SCHEDULE TRIP
+			foreach ($schedule_trip->as_array() as $i => $trip) {
+				if ( $airline['id'] == $trip->airlines_id)
+					$airlines[$key]['schedules']['trip'][$i] = $trip->as_array();
+			}
+			//RETURN FALSE IF TRIP IS NULL
+			if (isset($airlines[$key]['schedules']['trip']))
+			{
+				foreach ($schedule_return->as_array() as $j => $return) {
+					if ( $airline['id'] == $return->airlines_id)
+						$airlines[$key]['schedules']['return'][$j] = $return->as_array();
+				}
+			}
+			// echo $airline['id'] . "--";
+		}
+			// print_r($airlines);
+		//CLEAR AIRPLANES THAT HAVE NO SCHEDULES
+		$clear_airlines = [];
+		foreach ($airlines as $airline) {
+			if(count($airline['schedules'])>0)
+			{
+
+			echo $airline['name']  .":". count($airline['schedules']);
+			$clear_airlines[] = $airline;
+			}
+		}
+		 // print_r($clear_airlines);
+		echo json_encode($airlines);
 	}
 	public function action_add_flight(){
 		// print_r($this->params);die();
@@ -231,6 +340,7 @@ class Controller_Api extends Controller_Master {
 			echo json_encode(['status'=>'ok']);
 		// print_r($schedule);
 	} 
+
 
 } // End Welcome
 

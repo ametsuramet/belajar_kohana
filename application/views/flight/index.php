@@ -60,27 +60,49 @@
 	<div class="row">
 		<div class="col-md-8 col-md-offset-2" ng-show="data">
 			<h3>{{data.origin.name}} {{data.origin.city}} ({{data.origin.IATA}}) - {{data.destination.name}} {{data.destination.city}} ({{data.destination.IATA}})</h3>
-			<table class="table table-hover"  ng-show="data.schedule.length" >
+			<table class="table table-hover"  ng-show="data.airlines.length" >
 				<thead>
 					<tr>
-						<th>Maskapai</th>
+						<th></th>
+						<th>Date</th>
 						<th>Departure</th>
 						<th>Arrival</th>
+						<th width="20px"></th>
 						<th>Description</th>
 						<th>Total</th>
 					</tr>
 				</thead>
-				<tbody>
-					<tr ng-repeat="item in data.schedule">
-						<td>{{item.airlines.name}}</td>
-						<td>{{item.departure}}</td>
-						<td>{{item.arrival}}</td>
-						<td>{{item.description}}</td>
-						<td>{{(data.passenger.dewasa*item.price_adult)+(data.passenger.anak*item.price_children)+(data.passenger.balita*item.price_toddler) | currency : "IDR " : 0}}</td>
+				<tbody id="#{{item.id}}" ng-repeat="item in data.airlines">
+				
+					<tr >
+						<th class="airlines"  colspan="7">{{item.name}}</th>
 					</tr>
+					<tr ng-repeat="schedule in item.schedules.trip" >
+						<td></td>
+						<td>{{schedule.date | date:'dd-MM-yyyy'}}</td>
+						<td>{{schedule.departure | date:'HH:mm'}}</td>
+						<td>{{schedule.arrival | date:'HH:mm' }}</td>
+						<td>
+							<span><i class="fa fa-plane"></i></span>
+						</td>
+						<td>{{schedule.description}}</td>
+						<td>{{(data.passenger.dewasa*schedule.price_adult)+(data.passenger.anak*schedule.price_children)+(data.passenger.balita*schedule.price_toddler) | currency : "IDR " : 0}}</td>
+					</tr>
+					<tr ng-repeat="schedule in item.schedules.return" >
+						<td></td>
+						<td>{{schedule.date | date:'dd-MM-yyyy'}}</td>
+						<td>{{schedule.departure | date:'HH:mm'}}</td>
+						<td>{{schedule.arrival | date:'HH:mm' }}</td>
+						<td>
+							<span><i class="fa fa-plane rotate"></i></span>
+						</td>
+						<td>{{schedule.description}}</td>
+						<td>{{(data.passenger.dewasa*schedule.price_adult)+(data.passenger.anak*schedule.price_children)+(data.passenger.balita*schedule.price_toddler) | currency : "IDR " : 0}}</td>
+					</tr>
+						
 				</tbody>
 			</table>
-			<h4 class="table table-hover"  ng-hide="data.schedule.length" >Data Tidak Tersedia...</h4>
+			<h4 class="table table-hover"  ng-hide="data.airlines.length" >Data Tidak Tersedia...</h4>
 
 		</div>
 	</div>

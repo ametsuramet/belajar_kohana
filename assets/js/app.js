@@ -28,12 +28,13 @@ app.controller('addFlightCtrl', function ($scope,$http) {
 	      }
 	})
       $('#tgl_berangkat').datetimepicker({ format: 'DD-MM-YYYY' });
-      $('#berangkat,#tiba').datetimepicker({ format: 'HH:mm:ss' });
+      $('#berangkat,#tiba').datetimepicker({ format: 'HH:mm' });
       $scope.submit_airplane = function(){
       	$scope.tgl_berangkat = $('#tgl_berangkat').val()
       	$scope.berangkat = $('#berangkat').val()
       	$scope.tiba = $('#tiba').val()
-      	$http.get('api/add_flight?id_maskapai='+$scope.id_maskapai+'&id_asal='+$scope.id_asal+'&id_tujuan='+$scope.id_tujuan+'&tgl_berangkat='+$scope.tgl_berangkat+'&berangkat='+$scope.berangkat+'&tiba='+$scope.tiba+'&dewasa='+$scope.dewasa+'&anak='+$scope.anak+'&balita='+$scope.balita+'&description='+$scope.description)
+      	var url = 'api/add_flight?id_maskapai='+$scope.id_maskapai+'&id_asal='+$scope.id_asal+'&id_tujuan='+$scope.id_tujuan+'&tgl_berangkat='+$scope.tgl_berangkat+'&berangkat='+$scope.berangkat+'&tiba='+$scope.tiba+'&dewasa='+$scope.dewasa+'&anak='+$scope.anak+'&balita='+$scope.balita+'&description='+$scope.description
+      	$http.get(url)
     	.success(function(response) {
     		if(response.status=="ok"){
     			$('[name=maskapai]').val(null)
@@ -69,8 +70,12 @@ app.controller('flightCtrl', function ($scope,$http) {
       $scope.submit_flight = function(){
       	$scope.tgl_berangkat = $('#tgl_berangkat').val()
       	$scope.tgl_pulang = $('#tgl_pulang').val()
-      	$http.get('api/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita)
-    	.success(function(response) {$scope.data = response});
+      	var url = "api/penerbangan?ap=3928.3896&dt=02-11-2015.17-11-2015&ps=2.1.1"
+      	// var url = 'api/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita
+      	$http.get(url)
+	    	.success(function(response) {
+	    		$scope.data = response
+	    	});
       }
 })
 app.controller('ongkirCtrl', function ($scope,$http) {
