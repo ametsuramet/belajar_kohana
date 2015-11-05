@@ -35,11 +35,12 @@
       <a class="blog-nav-item" href="/twitter" data-menu="twitter">Twitter</a>
       <a class="blog-nav-item" href="/flight" data-menu="flight">Penerbangan</a>
       <a class="blog-nav-item" href="/flight/add" data-menu="add_flight">++Penerbangan</a>
-      <a class="blog-nav-item" href="#">About</a>
+      <a class="blog-nav-item" href="/login/logout">Logout</a>
     </nav>
   </div>
 </div>
 <div class="container" id="main">
+  <h4>Hallo, <?= Auth::instance()->get_user()->username ?></h4>
   <?= $content ?>
 </div>
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->

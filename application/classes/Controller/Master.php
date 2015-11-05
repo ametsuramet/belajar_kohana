@@ -14,6 +14,10 @@ class Controller_Master extends Controller {
 			$this->params->$key = $value;
 		}
 
+		if(!Auth::instance()->logged_in()){
+			HTTP::redirect("/login"); 
+        }
+
 	}
 
 	

@@ -2,9 +2,9 @@
 
 return array(
 
-	'driver'       => 'File',
+	'driver'       => 'ORM',
 	'hash_method'  => 'sha256',
-	'hash_key'     => NULL,
+	'hash_key'     => "asdasdasdasd",
 	'lifetime'     => 1209600,
 	'session_type' => Session::$default,
 	'session_key'  => 'auth_user',

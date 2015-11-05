@@ -70,8 +70,8 @@ app.controller('flightCtrl', function ($scope,$http) {
       $scope.submit_flight = function(){
       	$scope.tgl_berangkat = $('#tgl_berangkat').val()
       	$scope.tgl_pulang = $('#tgl_pulang').val()
-      	var url = "api/penerbangan?ap=3928.3896&dt=02-11-2015.17-11-2015&ps=2.1.1"
-      	// var url = 'api/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita
+      	// var url = "api/penerbangan?ap=3928.3896&dt=02-11-2015.17-11-2015&ps=2.1.1"
+      	var url = 'api/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita
       	$http.get(url)
 	    	.success(function(response) {
 	    		$scope.data = response
