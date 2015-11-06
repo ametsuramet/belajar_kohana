@@ -11,7 +11,7 @@ class Controller_Login extends Controller {
 	{
 	    
 		if(Auth::instance()->logged_in()){
-			HTTP::redirect("/"); 
+			HTTP::redirect("/dashboard"); 
         }
 		$content = View::factory('login/index');
 

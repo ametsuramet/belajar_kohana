@@ -43,21 +43,34 @@ app.controller('addFlightCtrl', function ($scope,$http) {
 		      	$('#berangkat').val(null)
 		      	$('#tiba').val(null)
     			$scope.id_maskapai = $scope.id_asal = $scope.id_tujuan = $scope.tgl_berangkat = $scope.berangkat = $scope.tiba = $scope.dewasa = $scope.anak = $scope.balita = $scope.description = null
-    			$scope.status = "SUKSES"
+    			$scope.load_flight(1)
     		}else{
     			$scope.status = "ERROR"
 
     		}
     	});
-    		setTimeout(function(){	$scope.status="" }, 1000);
+
 
       }
+    	
+
+      $scope.load_flight = function(page){
+      	$http.get('api/list_schedule?page='+page)
+      	.success(function(response){
+      		// console.log(response)
+      		$scope.data_flight = response
+      	})
+      }
+
+
+      $scope.load_flight(1)
+
 })
 app.controller('flightCtrl', function ($scope,$http) {
 	$scope.tgl_berangkat = $scope.tgl_pulang = 'NA'
 	$scope.dewasa = $scope.anak = $scope.balita = 0
 	 $( "[name=asal],[name=tujuan]" ).autocomplete({
-	      source: "api/bandara",
+	      source: "frontend/bandara",
 	      minLength: 2,
 	      select: function( event, ui ) {
 	      	if($(this).attr('name')=="asal")
@@ -71,7 +84,7 @@ app.controller('flightCtrl', function ($scope,$http) {
       	$scope.tgl_berangkat = $('#tgl_berangkat').val()
       	$scope.tgl_pulang = $('#tgl_pulang').val()
       	// var url = "api/penerbangan?ap=3928.3896&dt=02-11-2015.17-11-2015&ps=2.1.1"
-      	var url = 'api/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita
+      	var url = 'frontend/penerbangan?ap='+$scope.id_asal+'.'+$scope.id_tujuan+'&dt='+$scope.tgl_berangkat+'.'+$scope.tgl_pulang+'&ps='+$scope.dewasa+'.'+$scope.anak+'.'+$scope.balita
       	$http.get(url)
 	    	.success(function(response) {
 	    		$scope.data = response

@@ -1,6 +1,6 @@
 <?php defined('SYSPATH') or die('No direct script access.');
 
-class Controller_Api extends Controller_Master {
+class Controller_Api extends Controller_Master	 {
 
 	public function before()
 	{
@@ -340,6 +340,38 @@ class Controller_Api extends Controller_Master {
 			echo json_encode(['status'=>'ok']);
 		// print_r($schedule);
 	} 
+
+	public function action_list_schedule(){
+		$schedules = ORM::factory('Schedules');
+		$count = $schedules->find_all()->count();
+		$page = 1;
+
+		$limit = 10;
+		$last_page = ceil($count/$limit);
+		if(isset($this->params->page))
+			$page = $this->params->page;
+		$offset = ($page-1)*$limit;
+
+		$schedules = $schedules->limit($limit)->offset($offset)->order_by('id', 'desc')->find_all();
+		$list_schedule = [];
+		foreach ($schedules as $i=>$schedule) {
+			$list_schedule[$i] = $schedule->as_array();
+			$list_schedule[$i]['airlines'] = $schedule->airlines->name;
+			$list_schedule[$i]['origin'] = $schedule->origin->name;
+			$list_schedule[$i]['destination'] = $schedule->destination->name;
+		}
+		$output = [
+			'page' => $page,
+			'limit' => $limit,
+			'last_page' => $last_page,
+			'before' => $page == 1 ? false : $page - 1,
+			'next' => $page == $last_page ? false : $page + 1,
+			'count' => $count,
+			'items' => $list_schedule,
+			];
+		echo json_encode($output);
+
+	}
 
 
 } // End Welcome

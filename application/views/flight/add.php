@@ -3,10 +3,44 @@
 	
 		<div class="panel panel-danger crimson">
 			<div class="panel-body ">
-				<h1 class="invert">Tambah Jadwal :</h1>
+				
 
 				<div class="row">
-					<div class="col-md-6 col-sm-6">
+					<div class="col-md-8 col-sm-6">
+						
+						<div class="table-responsive">
+							<table class="table table-hover">
+								<thead>
+									<tr>
+										<th>Tgl</th>
+										<th>Maskapai</th>
+										<th>Asal</th>
+										<th>Tujuan</th>	
+										<th>Waktu Berangkat</th>	
+										<th>Waktu Tiba</th>	
+										<th>Deskripsi</th>	
+									</tr>
+								</thead>
+								<tbody>
+									<tr ng-repeat="item in data_flight.items">
+										<td>{{item.date | date:'dd-MM-yyyy'}}</td>
+										<td>{{item.airlines}}</td>
+										<td>{{item.origin}}</td>
+										<td>{{item.destination}}</td>
+										<td>{{item.departure}}</td>
+										<td>{{item.arrival}}</td>
+										<td>{{item.description}}</td>
+									</tr>
+								</tbody>
+							</table>
+						</div>
+						<div>{{data_flight.page}} of {{data_flight.last_page}} pages 
+							<i class="fa fa-arrow-circle-o-right next_table" ng-show="data_flight.next" ng-click="load_flight(data_flight.next)"></i>
+							<i class="fa fa-arrow-circle-o-left prev_table" ng-show="data_flight.before" ng-click="load_flight(data_flight.before)"></i>
+						</div>
+					</div>
+					<div class="col-md-4 col-sm-6">
+						<h1 class="invert">Tambah Jadwal :</h1>
 						<div class="form-group">
 							<label class="invert">Maskapai :</label>
 							<input name="maskapai" class="form-control" ng-model="maskapai">
@@ -31,33 +65,18 @@
 							<label class="invert">Tiba :</label>
 							<input name="tiba" class="form-control" ng-model="tiba" id="tiba">
 						</div>
-						
-					</div>
-					<div class="col-md-6 col-sm-6">
-						
-						<div class="row">
-							<div class="col-md-12">
-							<label class="invert">Harga :</label>
-							<br>
-							<div class="col-md-4 col-sm-4">
-								<div class="form-group">
-									<label class="invert">Dewasa :</label>
-									<input name="dewasa" class="form-control" ng-model="dewasa" type="number" value="0">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<div class="form-group">
-									<label class="invert">Anak2 :</label>
-									<input name="anak" class="form-control" ng-model="anak" type="number" value="0">
-								</div>
-							</div>
-							<div class="col-md-4 col-sm-4">
-								<div class="form-group">
-									<label class="invert">Balita :</label>
-									<input name="balita" class="form-control" ng-model="balita" type="number" value="0">
-								</div>
-							</div>
-							</div>
+							<h3 class="invert">Harga :</h3>
+						<div class="form-group">
+							<label class="invert">Dewasa :</label>
+							<input name="dewasa" class="form-control" ng-model="dewasa" type="number" value="0">
+						</div>
+						<div class="form-group">
+							<label class="invert">Anak2 :</label>
+							<input name="anak" class="form-control" ng-model="anak" type="number" value="0">
+						</div>
+						<div class="form-group">
+							<label class="invert">Balita :</label>
+							<input name="balita" class="form-control" ng-model="balita" type="number" value="0">
 						</div>
 						<div class="form-group">
 							<label class="invert">Keterangan :</label>

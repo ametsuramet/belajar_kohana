@@ -1,3 +1,3 @@
 var  page = $('#page').val()
 // console.log(page)
-$('.blog-nav-item[data-menu="'+page+'"]').addClass('active')
+$('#main-menu li[data-menu="'+page+'"]').find('a').addClass('active-menu')
