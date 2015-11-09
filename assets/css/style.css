@@ -348,6 +348,9 @@ footer {
 }
 .crimson{
     background: crimson
+;
+    border: none;
+    box-shadow: 0px 0px 5px rgba(0,0,0,0.7);
 }
 .invert{
     color: #fff
@@ -375,7 +378,8 @@ footer {
 }
 #main-carousel .carousel-caption{
         background: rgba(0,0,0,0.4);
-    padding: 20px;
+        padding: 20px;
+        bottom: 180px;
 }
 #main-carousel h1,
 #main-carousel p{
@@ -402,8 +406,76 @@ footer {
     text-decoration: none;
 }
 #main-frontend{
-    margin-top: 500px;
+    margin-top: 300px;
 }
+
+.menu-wrapper.scrolled{
+    background-color: rgba(0,0,0,0.8);
+    margin: 20px -10px;
+    -webkit-transition: background-color 0.2s, margin 0.4s ease-in; /* Safari */
+    transition: background-color 0.4s, margin 0.2s ease-in;
+}
+.menu-wrapper{
+
+    -webkit-transition: background-color 0.2s, margin 0.1s ease-out; /* Safari */
+    transition: background-color 0.2s, margin 0.1s ease-out;
+}
+.menu-wrapper.scrolled .brand{
+    font-size: 2.2em;
+    font-weight: bold;
+    margin: 20px 5px;
+        text-shadow: 2px 2px 5px rgba(0,0,0,0.8);
+    -webkit-transition: all 0.2s ease-out; /* Safari */
+    transition: all 0.2s ease-out;
+}
+.brand{
+    font-size: 1.2em;
+    font-weight: bold;
+    margin: 20px 5px;
+     -webkit-transition: all 0.1s ease-in; /* Safari */
+    transition: all 0.1s ease-in;
+}
+.trip-result{
+    padding: 15px;
+    border: 5px solid cadetblue;
+}
+.icon-wrapper{
+    margin: 0 auto;
+    border-radius: 50%;
+    width: 160px;
+    display: block;
+    height: 160px;
+    text-align: center;
+    padding-top: 36px;
+}
+.icon-wrapper.icon-search{
+    background: cadetblue
+}
+.icon-wrapper.icon-plane{
+    background: cornflowerblue
+}
+.icon-wrapper.icon-eat{
+    background: darkgoldenrod
+}
+.icon-wrapper img{
+    width: 56%;
+}
+.front-panel-wrapper{
+    margin-top: 40px;
+}
+.front-panel{
+    text-align: center
+}
+.item-search{
+    float: right !important;
+    font-size: 1.4em
+}
+#footer{
+    min-height: 200px;
+    margin-top: 40px;
+    background-color: currentColor;
+}
+
 /*==============================================
     MEDIA QUERIES     
   =============================================*/
