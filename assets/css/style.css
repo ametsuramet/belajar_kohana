@@ -470,6 +470,34 @@ footer {
     float: right !important;
     font-size: 1.4em
 }
+.input-search{
+    float: right !important;
+    width: 0px;
+     -webkit-transition: all 0.4s ease-in; /* Safari */
+    transition: all 0.4s ease-in;
+}
+
+.input-search.open input{
+    padding-left: 5px;
+    padding-right: 5px;
+
+}
+
+.input-search.open{
+    float: right !important;
+    width: 200px;
+
+     -webkit-transition: all 0.2s ease-out; /* Safari */
+    transition: all 0.2s ease-out;
+
+}
+.input-search input{
+    background-color: rgba(0,0,0,0.6);
+    border: none;
+    width: 100%;
+    padding: 0px;
+    color: #fff;
+}
 #footer{
     min-height: 200px;
     margin-top: 40px;

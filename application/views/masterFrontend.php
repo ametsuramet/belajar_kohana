@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Free Bootstrap Admin Template</title>
+    <title>TRAVELGEEK</title>
     <link href="<?= URL::base() ?>bower_components/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/style.css" rel="stylesheet">
     <link href="<?= URL::base() ?>assets/css/jquery-ui.min.css" rel="stylesheet">
@@ -38,12 +38,13 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                 <ul class="main-menu">
-                    <li class="brand"><a href="#">TRAVELGEEK</a></li>
+                    <li class="brand"><a href="#"><i class="fa fa-plane"></i> TRAVELGEEK</a></li>
                     <li class="active"><a href="#">Home</a></li>
                     <li><a href="#">Paket</a></li>
                     <li><a href="#">Promo</a></li>
                     <li><a href="#">Tentang Kami</a></li>
-                    <li class="item-search"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="item-search" data-open="0"><a href="#"><i class="fa fa-search"></i></a></li>
+                    <li class="input-search"><input type="text" placeholder="search anything... "/></li>
                 </ul>
 
             
@@ -76,6 +77,22 @@
             else
                 $('.menu-wrapper').removeClass('scrolled')
         });
+
+        $('.item-search').click(function(){
+            var open = $(this).data('open')
+            if(!open)
+            {
+                $('.input-search').addClass('open')
+                $(this).data('open',1)
+            }
+            else
+            {
+                $('.input-search').removeClass('open')
+                $(this).data('open',0)
+            }
+            // console.log(open)
+            return false
+        })
     </script>
 </body>
 </html>

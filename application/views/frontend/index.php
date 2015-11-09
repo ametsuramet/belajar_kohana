@@ -2,7 +2,7 @@
 <div class="container" id="main-frontend">
 	<div ng-controller="flightCtrl">
 	<div class="row">
-	<div class="col-md-12">
+	<div class="col-md-8 col-md-offset-2 col-sm-12 col-xs-12 col-lg-8 col-lg-offset-2">
 		<div class="panel panel-danger crimson wow bounceInUp" data-wow-duration="2s" data-wow-delay="1s"> 
 			<div class="panel-body ">
 				<div class="row">
@@ -98,7 +98,7 @@
 		</div>
 	</div>
 	<div class="row front-panel-wrapper">
-		<div class="col-md-4 col-sm-4 wow bounceInUp front-panel" data-wow-duration="1s" data-wow-delay="2.2s">
+		<div class="col-md-4 col-sm-4 wow bounceInLeft front-panel" data-wow-duration="1s" data-wow-delay="1.2s">
 			<div class="icon-wrapper icon-search">
 				<img src="<?= URL::base() ?>assets/img/icon-search.png">
 			</div>
@@ -106,7 +106,7 @@
 			<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
 			tempor incididunt ut labore et dolore magna aliqua. </p>
 		</div>
-		<div class="col-md-4 col-sm-4 wow bounceInUp front-panel" data-wow-duration="1s" data-wow-delay="2.4s">
+		<div class="col-md-4 col-sm-4 wow bounceInDown front-panel" data-wow-duration="1s" data-wow-delay="1.4s">
 			<div class="icon-wrapper icon-plane">
 				<img src="<?= URL::base() ?>assets/img/icon-plane.png">
 			</div>
@@ -116,7 +116,7 @@
 			consequat. </p>
 
 		</div>
-		<div class="col-md-4 col-sm-4 wow bounceInUp front-panel" data-wow-duration="1s" data-wow-delay="2.6s">
+		<div class="col-md-4 col-sm-4 wow bounceInRight front-panel" data-wow-duration="1s" data-wow-delay="1.6s">
 			<div class="icon-wrapper icon-eat">
 				<img src="<?= URL::base() ?>assets/img/icon-eat.png">
 			</div>
